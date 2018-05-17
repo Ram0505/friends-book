@@ -1,0 +1,56 @@
+package com.friendsbook.dao;
+
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+
+import com.friendsbook.model.Login;
+import com.friendsbook.model.User;
+
+public class UserDaoImpl implements UserDao {
+	@Autowired
+	DataSource datasource;
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+
+	public void register(User user)  throws IOException, SQLException {		
+		String sql = "insert into friendsbook values(?,?,?,?,?,?)";
+		jdbcTemplate.update(sql, new Object[] { user.getFirstname(), user.getSurname(),
+				user.getPhone(), user.getPassword(), user.getDob(), user.getGender() });
+		
+		
+	}
+
+	public User validateUser(Login login) {
+		String sql = "select * from friendsbook where phone='" + login.getPhone() + "' and password='"
+				+ login.getPassword() + "'";
+		List<User> users = jdbcTemplate.query(sql, new UserMapper());
+		return users.size() > 0 ? users.get(0) : null;
+	}
+
+	@Override
+	public List<User> getDetails() {
+		String sql = "select * from friendsbook";
+		List<User> users = jdbcTemplate.query(sql, new UserMapper());
+		return users;
+	}
+}
+
+class UserMapper implements RowMapper<User> {
+	public User mapRow(ResultSet rs, int arg1) throws SQLException {
+		User user = new User();
+		user.setFirstname(rs.getString("firstname"));
+		user.setSurname(rs.getString("surname"));
+		user.setPhone(rs.getBigDecimal("phone"));
+		user.setPassword(rs.getString("password"));
+		user.setDob(rs.getString("dateofbirth"));
+		user.setGender(rs.getString("gender"));
+		return user;
+	}
+}

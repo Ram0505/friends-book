@@ -1,0 +1,52 @@
+@CHARSET "ISO-8859-1";
+
+/* footer-css */
+
+<style>
+ .footer_resize {
+     
+    margin-top:0px;
+    padding: 0px;
+    background-color:#000;
+    line-height: 1.5em;
+    color: #fff;
+ border:solid 2px #CCC;
+}
+
+.footer_para {
+ 
+    color: #fff;
+ 
+.footer_para  a:link {
+ color:#FFF!important;
+}
+
+.nav_bar {
+	background:#6495ED; 
+	border: 1px solid  #ff0080 ;
+	width: 1000px;
+	margin: auto;
+	font-size: 22px;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 10px 20px 10px 20px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	/*  border-radius:10px; */
+	text-align: center;
+	margin-top: 50px;
+}
+
+.nav_bar a {
+	color: blue;
+	text-decoration: none;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.nav_bar a:hover {
+	color: #804040;
+	text-decoration: underline;
+}
+
+</style>
